@@ -16,8 +16,7 @@ export const signUpQuery = async (body) => {
     success('signUpQuery - successfully retrieved data ', JSON.stringify(data));
     return data;
   } catch (err) {
-    error('signUpQuery - error= ', err);
-    throw new Error(err);
+    console.error('signUpQuery - error= ', err);
   }
 };
 
@@ -29,7 +28,6 @@ export const loginQuery = async (body) => {
     success('loginQuery - successfully retrieved data ', data);
     return data;
   } catch (err) {
-    error('loginQuery - error= ', err);
-    throw new Error(err);
+    console.error('loginQuery - error= ', err);
   }
 }
