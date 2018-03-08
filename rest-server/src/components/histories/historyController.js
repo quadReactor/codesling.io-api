@@ -24,11 +24,16 @@ import { fetchUserQuery } from "../users/userQueries";
 export const fetchHistoryController = async (req, res) => {
   try {
     const { rows } = await historyQueryHelper(req.params);
-    await rows.forEach(async row => {
+    // await rows.forEach(async row => {
+    //   const user = await fetchUserQuery(row.user_id);
+    //   row.receiver = user;
+    //   console.log('row',row);
+    // });
+    for (let row of rows){
       const user = await fetchUserQuery(row.user_id);
       row.receiver = user;
-      console.log(row);
-    });
+      console.log('row',row);
+    }
     return res.status(200).send(rows);
   } catch (err) {
     error("error fetching messages ", err);
