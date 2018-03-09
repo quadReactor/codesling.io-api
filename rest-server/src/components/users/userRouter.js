@@ -1,12 +1,14 @@
-import express from 'express';
+import express from "express";
 
 import {
-  fetchAllUserController
-} from './userControllers';
+  fetchAllUserController,
+  fetchSearchUserController
+} from "./userControllers";
 
 const router = express.Router();
 
-router.route('/fetchAllUsers')
-  .get(fetchAllUserController);
+router.route("/fetchAllUsers").get(fetchAllUserController);
+
+router.route("/fetchSearchUser/:username").get(fetchSearchUserController);
 
 export default router;
