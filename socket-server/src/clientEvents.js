@@ -7,6 +7,7 @@ import {
   serverLeave,
   serverRun,
   serverMessage,
+  serverChat,
 } from './serverEvents';
 
 /**
@@ -63,12 +64,27 @@ const clientMessage = async ({ io, room }, payload) => {
   }
 };
 
+const clientChat = async ({ io, room }, payload) => {
+  success('client message received');
+  //payload = chat
+  try {
+    // const { data } = await axios.post(`${url}/messages/`, payload)
+    
+    
+    serverChat({ io, room }, payload);
+  } catch (e) {
+    success('error emitting chat', e);
+  }
+};
+
+
 const clientEmitters = {
   'client.ready': clientReady,
   'client.update': clientUpdate,
   'client.disconnect': clientDisconnect,
   'client.run': clientRun,
   'client.message': clientMessage,
+  'client.Chat': clientChat,
 };
 
 export default clientEmitters;
