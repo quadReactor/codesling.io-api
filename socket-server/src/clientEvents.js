@@ -84,7 +84,7 @@ const clientEmitters = {
   'client.disconnect': clientDisconnect,
   'client.run': clientRun,
   'client.message': clientMessage,
-  'client.Chat': clientChat,
+  'client.chat': clientChat,
 };
 
 export default clientEmitters;
