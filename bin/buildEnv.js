@@ -1,19 +1,20 @@
 const fs = require('fs');
-const _ = require('lodash');
 
-const envVariables = require('../config/.env.sample');
+const envVariables = require('../config/.env.sample.js');
 
-const createENVFile = (directory, variables) => {
-  _.each(variables, (variable) => {
-    fs.appendFileSync(`./${directory}/.env`, variable + '\n');
+const makeEnvFiles = () => {
+  for (let key in envVariables) {
+    fs.writeFileSync(`./${key}/.env`, '');
+    appendEnvFiles(key)
+  }
+}
+
+const appendEnvFiles = (k) => {
+  envVariables[k].forEach((variable) => {
+    fs.appendFileSync(`./${k}/.env`, variable + '\n')
   })
 }
 
-const buildEnv = () => {
-  _.each(envVariables, (value, key) => {
-    fs.writeFileSync(`./${key}/.env`, '')
-    createENVFile(key, value);
-  });
-}
+makeEnvFiles();
 
-buildEnv();
+

@@ -16,7 +16,7 @@ import {
 
 export const signUpController = async (req, res) => {
   try {
-    req.body.password = await hashPassword(req.body.password)
+    req.body.password = await hashPassword(req.body.password);
     const { rows } = await signUpQuery(req.body);
     const { id, email } = rows[0];
     success('signUpController - successfully retrieved data ', JSON.stringify(rows[0]));
@@ -24,8 +24,7 @@ export const signUpController = async (req, res) => {
     rows[0].token = token;
     return res.status(200).append('authorization', JSON.stringify(token)).send(rows[0]);
   } catch (err) {
-    error('signUpController - error= ', err);
-    throw new Error(err);
+    console.error('signUpController - error= ', err);
   }
 };
 
@@ -39,7 +38,6 @@ export const loginController = async (req, res) => {
     rows[0].token = token;
     return res.status(200).append('authorization', JSON.stringify(token)).send(rows[0]);
   } catch (err) {
-    error('loginController - error= ', err);
-    throw new Error(err);
+    console.error('loginController - error= ', err);
   }
 };
